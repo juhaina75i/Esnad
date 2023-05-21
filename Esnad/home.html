@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+              <img style="margin-left: 2em;" src="images/logo.jpg" alt="" width="60" height="54">
+                    <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#">Suppliers</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="visitors.html">Visitors</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="employee.html">Employees</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="bill.html">Invoicing review</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Settings</a>
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-light" id="sidebarToggle">Hide menu</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Company Name</a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="#!">Log Out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Page content-->
+
+
+                     <script>
+                     $(document).ready(function(){
+                     	$('[data-toggle="tooltip"]').tooltip();
+                     	var actions = $("table td:last-child").html();
+                     	// Append table with add row form on add new button click
+                         $(".add-new").click(function(){
+                     		$(this).attr("disabled", "disabled");
+                     		var index = $("table tbody tr:last-child").index();
+                             var row = '<tr>' +
+                                 '<td><input type="text" class="form-control" name="name" id="name"></td>' +
+                                 '<td><input type="text" class="form-control" name="department" id="department"></td>' +
+                                 '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
+                                 '<td><input type="text" class="form-control" name="name" id="name"></td>' +
+                                 '<td><input type="text" class="form-control" name="department" id="department"></td>' +
+                                 '<td><input type="text" class="form-control" name="phone" id="phone"></td>' +
+                                 '<td><input type="text" class="form-control" name="name" id="name"></td>' +
+
+
+                     			'<td>' + actions + '</td>' +
+                             '</tr>';
+                         	$("table").append(row);
+                     		$("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+                             $('[data-toggle="tooltip"]').tooltip();
+                         });
+                     	// Add row on add button click
+                     	$(document).on("click", ".add", function(){
+                     		var empty = false;
+                     		var input = $(this).parents("tr").find('input[type="text"]');
+                             input.each(function(){
+                     			if(!$(this).val()){
+                     				$(this).addClass("error");
+                     				empty = true;
+                     			} else{
+                                     $(this).removeClass("error");
+                                 }
+                     		});
+                     		$(this).parents("tr").find(".error").first().focus();
+                     		if(!empty){
+                     			input.each(function(){
+                     				$(this).parent("td").html($(this).val());
+                     			});
+                     			$(this).parents("tr").find(".add, .edit").toggle();
+                     			$(".add-new").removeAttr("disabled");
+                     		}
+                         });
+                     	// Edit row on edit button click
+                     	$(document).on("click", ".edit", function(){
+                             $(this).parents("tr").find("td:not(:last-child)").each(function(){
+                     			$(this).html('<input type="text" class="form-control" value="' + $(this).text() + '">');
+                     		});
+                     		$(this).parents("tr").find(".add, .edit").toggle();
+                     		$(".add-new").attr("disabled", "disabled");
+                         });
+                     	// Delete row on delete button click
+                     	$(document).on("click", ".delete", function(){
+                             $(this).parents("tr").remove();
+                     		$(".add-new").removeAttr("disabled");
+                         });
+                     });
+                     </script>
+
+
+
+
+                </head>
+                <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+                     <!-- PRE LOADER -->
+                     <section class="preloader">
+                          <div class="spinner">
+
+                               <span class="spinner-rotate"></span>
+
+                          </div>
+                     </section>
+
+
+
+                     <div class="container">
+                       <h2 class="text-info">Supplier data list</h2>
+                       <p style= "color: #808080;">Type something in the input field to search the table for names, ld Number or Company:</p>
+                       <input style="border-color: #17a2b8; " class="form-control" id="myInput" type="text" placeholder="Search..">
+                       <br>
+                     <br>
+                     <br>
+                     <br>
+                     <table style="width:50%;" align="center" class="table table-bordered table-striped">
+                       <thead>
+                         <tr style="white-space: nowrap; padding: 0 5px 0 0; color:#3A5572; font-weight: bold;">
+                           <th scope="col">Id</th>
+                           <th scope="col">Company Name</th>
+                           <th scope="col">Tax number</th>
+                           <th scope="col">Commercial Registration No</th>
+                           <th scope="col">The number of requests</th>
+                           <th scope="col">Total</th>
+                         </tr>
+                       </thead>
+                       <tbody id="myTable" style="white-space: nowrap; padding: 0 5px 0 0; color:#3A5572; font-weight: bold;">
+                         <tr class="text-danger">
+                           <th scope="row">1</th>
+                           <td>Company1</td>
+                           <td>123456789900000</td>
+                           <td>12345678910</td>
+                           <td>28</td>
+                           <td>200000</td>
+
+                         </tr>
+                         <tr class="text-danger">
+                           <th scope="row">2</th>
+                           <td>Company2</td>
+                           <td>123456789900000</td>
+                           <td>12345678910</td>
+                           <td>98</td>
+                           <td>342000</td>
+
+                         </tr>
+
+                           <tr class="text-danger">
+                             <th scope="row">3</th>
+                           <td>Company3</td>
+                           <td>123456789900000</td>
+                           <td>12345678910</td>
+                           <td>99</td>
+                           <td>1200000</td>
+                         </tr>
+                         <tr>
+                           <th scope="row">4</th>
+                           <td>Company4</td>
+                           <td>123456789900000</td>
+                           <td>12345678910</td>
+                           <td>17</td>
+                           <td>16700</td>
+
+                         </tr>
+                         <tr>
+                           <th scope="row">5</th>
+                           <td>Company5</td>
+                           <td>123456789900000</td>
+                           <td>12345678910</td>
+                           <td>8</td>
+                           <td>8000</td>
+
+                         </tr>
+                         <tr class="text-danger">
+                           <th scope="row">6</th>
+                           <td>Company6</td>
+                           <td>123456789900000</td>
+                           <td>12345678910</td>
+                           <td>30</td>
+                           <td>43000</td>
+
+                         </tr>
+                         <tr>
+                           <th scope="row">7</th>
+                           <td>Company7</td>
+                           <td>123456789900000</td>
+                           <td>12345678910</td>
+                           <td>28</td>
+                           <td>200000</td>
+
+                         </tr>
+                         <tr>
+                           <th scope="row">8</th>
+                           <td>Company8</td>
+                           <td>123456789900000</td>
+                           <td>12345678910</td>
+                           <td>26</td>
+                           <td>153000</td>
+
+                         </tr>
+                         <tr>
+                           <th scope="row">9</th>
+                           <td>Company9</td>
+                           <td>123456789900000</td>
+                           <td>12345678910</td>
+                           <td>100</td>
+                           <td>323999</td>
+
+                         </tr>
+                         <tr class="text-danger">
+                           <th scope="row">10</th>
+                           <td>Company10</td>
+                           <td>123456789900000</td>
+                           <td>12345678910</td>
+                           <td>40</td>
+                           <td>4230000</td>
+
+                         </tr>
+                         <tr class="text-danger">
+                           <th scope="row">11</th>
+                           <td>Company11</td>
+                           <td>123456789900000</td>
+                           <td>12345678910</td>
+                           <td>28</td>
+                           <td>200000</td>
+
+                         </tr>
+                         <tr class="text-danger">
+                            <th scope="row">12</th>
+                           <td>Company12</td>
+                           <td>123456789900000</td>
+                           <td>12345678910</td>
+                           <td>8</td>
+                           <td>2000</td>
+
+                         </tr>
+                       </tbody>
+                     </table>
+                     <nav aria-label="...">
+                       <ul class="pagination">
+                         <li class="page-item disabled">
+                           <span class="page-link">Previous</span>
+                         </li>
+                         <li style = "color: #17a2b8;" class="page-item"><a class="page-link" href="viewvisitors.html">1</a></li>
+                         <li class="page-item active">
+                           <span style = "background-color: #17a2b8;" class="page-link">
+                             2
+                             <span  class="sr-only">(current)</span>
+                           </span>
+                         </li>
+                         <li style = "color: #17a2b8;" class="page-item"><a class="page-link" href="viewvisitors.html">3</a></li>
+                         <li class="page-item">
+                           <a style = "color: #17a2b8;" class="page-link" href="viewvisitors.html">Next</a>
+                         </li>
+                       </ul>
+                     </nav>
+                     <button  style="float: right; margin:20px;" class="btn btn-info" onclick="printFunction()">Print</button>​
+                     <br>
+
+                     <script>
+                       function printFunction() {
+                         window.print();
+                       }
+                     </script>
+                     <script>
+                     $(document).ready(function(){
+                       $("#myInput").on("keyup", function() {
+                         var value = $(this).val().toLowerCase();
+                         $("#myTable tr").filter(function() {
+                           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                         });
+                       });
+                     });
+                     </script>
+                     <!-- SCRIPTS -->
+                     <script src="js/jquery.js"></script>
+                     <script src="js/bootstrap.min.js"></script>
+                     <script src="js/jquery.sticky.js"></script>
+                     <script src="js/jquery.stellar.min.js"></script>
+                     <script src="js/wow.min.js"></script>
+                     <script src="js/smoothscroll.js"></script>
+                     <script src="js/owl.carousel.min.js"></script>
+                     <script src="js/custom.js"></script>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
